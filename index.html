@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>早晨財經速解讀 · 筆記</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .site-header .mic { font-size: 20px; }
+    .site-header h1 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
+    .site-header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
+
+    /* ── Episode nav ── */
+    .ep-tabs {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .ep-tab {
+      padding: 12px 18px;
+      font-size: 13px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      color: #666;
+      transition: all 0.15s;
+    }
+    .ep-tab.active {
+      color: #1a1a1a;
+      border-bottom-color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ── Episode header ── */
+    .ep-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .ep-meta .podcast-name {
+      font-size: 12px;
+      color: #888;
+      font-weight: 500;
+    }
+    .ep-meta .ep-date {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .ep-title {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+    .ep-host {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      border: 1px solid #ebebeb;
+    }
+    .card-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .card-label .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      flex-shrink: 0;
+    }
+    .card p {
+      font-size: 14.5px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    /* ── 大盤觀點 badge ── */
+    .outlook-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .outlook-badge.bull { background: #e8f5e9; color: #2e7d32; }
+    .outlook-badge.bear { background: #fce4ec; color: #c62828; }
+    .outlook-badge.neutral { background: #f3f4f6; color: #555; }
+
+    /* ── Table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #aaa;
+      padding: 6px 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #f8f8f8;
+      color: #333;
+    }
+    tr:last-child td { border-bottom: none; }
+    .up { color: #2e7d32; font-weight: 600; }
+    .down { color: #c62828; font-weight: 600; }
+    .flat { color: #888; }
+
+    /* ── Key observations ── */
+    .obs-list { list-style: none; padding: 0; margin: 0; }
+    .obs-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 14.5px;
+      color: #333;
+    }
+    .obs-list li:last-child { border-bottom: none; }
+    .obs-num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .obs-topic {
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* ── Footer ── */
+    .disclaimer {
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 40px;
+    }
+
+    /* ── Hidden episodes ── */
+    .episode { display: none; }
+    .episode.active { display: block; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="mic">🎙</span>
+  <div>
+    <h1>財經 Podcast 筆記</h1>
+    <div class="subtitle">整理自逐字稿 · 僅供參考，不構成投資建議</div>
+  </div>
+</header>
+
+<!-- Episode tab navigation -->
+<nav class="ep-tabs" id="epTabs">
+  <div class="ep-tab active" data-ep="ep20260416">2026-04-16</div>
+  <div class="ep-tab" data-ep="ep20260415">2026-04-15</div>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════
+       Episode: 2026-04-16
+  ══════════════════════════════════════════ -->
+  <div class="episode active" id="ep20260416">
+
+    <div class="ep-meta">
+      <span class="podcast-name">早晨財經速解讀</span>
+      <span class="ep-date">· 2026-04-16（四）</span>
+    </div>
+    <h2 class="ep-title">戰爭沒結束，但市場已慶祝<br>——標普站上 7,000 點</h2>
+    <div class="ep-host">主持人：游庭皓</div>
+
+    <!-- 本集導讀 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>本集導讀</div>
+      <p>
+        本集游庭皓從「戰爭未結束，市場已慶祝」切入，分析標普500創下7,000點歷史新高、那斯達克同步創高背後的驅動力——並非風險全面消退，而是CTA量化趨勢資金的機械性追高，以及空單被迫回補。接著剖析荷莫茲海峽僵局：Polymarket預測美伊4月底達協議機率已升至38%，但核計畫與能源控制權分歧仍大。美中博弈方面，川普去信習近平要求停止對伊武援，金融時報更指伊朗已取得中國T101B偵察衛星用於監控美軍基地，衝突層次從飛彈戰升級至太空情報整合。台股日均成交量達9,400億，第一季累計證交稅1,237億創20年最快增速，兆元成交量逐漸成新常態。AI面向聚焦艾思摩爾（ASML）上調全年財測至3,600–4,000億歐元，以及AI法律戰全面開打——紐時 vs OpenAI、馬斯克告科羅拉多州、AI音樂授權談判破裂，監管是否跟上商業模式成為本輪AI行情的核心變數。
+      </p>
+    </div>
+
+    <!-- 大盤觀點 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>大盤觀點</div>
+      <div class="outlook-badge bull">▲ 偏多，注意波動</div>
+      <p>
+        市場情緒從「強制賣出」翻轉為「強制追買」，CTA動能資金短期預計加碼數百億美元。標普500已突破八大投顧Q2目標區間，台股37,000點在望。惟油價高檔、戰事未定，股市已領先忽略風險，建議採「雙尾佈局」——右側買納指／費半捕捉AI動能，左側以VIX期權對沖尾部風險。
+      </p>
+    </div>
+
+    <!-- 重點速覽 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>重點速覽</div>
+      <table>
+        <thead>
+          <tr>
+            <th>指數／資產</th>
+            <th>漲跌幅</th>
+            <th>收盤</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>道瓊</td><td class="down">−0.15%</td><td>48,463</td></tr>
+          <tr><td>標普 500</td><td class="up">+0.80% 🔴歷史新高</td><td>7,000+</td></tr>
+          <tr><td>那斯達克</td><td class="up">+1.60% 🔴歷史新高</td><td>24,016</td></tr>
+          <tr><td>費半</td><td class="up">+0.16%</td><td>9,239</td></tr>
+          <tr><td>台股</td><td class="up">+211 點</td><td>36,937</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 關鍵觀察 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>關鍵觀察</div>
+      <ul class="obs-list">
+        <li>
+          <span class="obs-num">1</span>
+          <span><span class="obs-topic">中東停火邊緣</span> — 美伊停火默契維持，下週范斯預計赴巴基斯坦再談；核心癥結為核濃縮限制 vs 能源控制權。Polymarket 機率升至 38%。</span>
+        </li>
+        <li>
+          <span class="obs-num">2</span>
+          <span><span class="obs-topic">美中太空博弈</span> — 金融時報指伊朗取得中國 T101B 偵察衛星，用於監控美軍基地；衝突從飛彈戰升級至太空情報整合。</span>
+        </li>
+        <li>
+          <span class="obs-num">3</span>
+          <span><span class="obs-topic">全球陣營重組</span> — 中印解凍、中歐汽車互開市場、中俄能源深化；美國外交孤立加劇，盟友各走各的路。</span>
+        </li>
+        <li>
+          <span class="obs-num">4</span>
+          <span><span class="obs-topic">台股新常態</span> — Q1 累計證交稅 1,237 億，創 20 年最快增速；兆元日均成交量正在成為新常態。</span>
+        </li>
+        <li>
+          <span class="obs-num">5</span>
+          <span><span class="obs-topic">ASML 上調財測</span> — 全年目標 3,600–4,000 億歐元，韓國（三星／SK 海力士）設備採購佔比從 22% 跳至 45%，2026 年產能已滿。</span>
+        </li>
+        <li>
+          <span class="obs-num">6</span>
+          <span><span class="obs-topic">AI 法律戰開打</span> — 紐時 vs OpenAI、馬斯克告科羅拉多州、AI 音樂授權談判破裂；監管能否跟上是本輪 AI 行情最大變數。</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
+  </div>
+  <!-- ／Episode: 2026-04-16 -->
+
+  <!-- ══════════════════════════════════════════
+       Episode: 2026-04-15
+  ══════════════════════════════════════════ -->
+  <div class="episode" id="ep20260415">
+
+    <div class="ep-meta">
+      <span class="podcast-name">早晨財經速解讀</span>
+      <span class="ep-date">· 2026-04-15（三）</span>
+    </div>
+    <h2 class="ep-title">標普距歷史新高僅剩 12 點<br>——PPI 低於預期，市場提前交易和平</h2>
+    <div class="ep-host">主持人：游庭皓</div>
+
+    <!-- 本集導讀 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>本集導讀</div>
+      <p>
+        本集游庭皓聚焦美伊談判希望與 PPI 數據雙重催化下，美股四大指數同步走高。標普距歷史新高僅剩 12 點，那斯達克連續第十個交易日收紅，創 2021 年來最長連漲紀錄。台股同步創下六項歷史新高，包括加權指數、台積電股價（2,055 元）、台指期盤中點位（36,430）等。3 月 PPI 月增僅 0.5%（遠低於預期 1.1%），年增 4%（預期 4.6%），低於預期帶動股市大漲，但「低於預期的通膨」並不等於「沒有通膨」。資金結構面，一季度 5 億以上大戶人數年增 33%，金管會宣布將外國直債納入擔保品，預估釋放 3,000 億元活水。能源供應鏈方面，台灣氦氣從卡達轉向美國，美國石油出口創歷史新高（520 萬桶/天），亞洲需求暴增 82%；台化、台塑因中東供應受阻面臨缺料，石化產能剩三成。宏觀結構上，美國個人所得 MOM 轉負（-0.1%）但 PCE 消費仍增（+0.5%），實質薪資重度衰退；台灣則維持高成長（GDP 7-8%）低通膨（1.2%）格局，但貧富差距今年超越日韓排全球第 12 名。估值方面，標普資訊科技本益比已回到 2022 年低點，游庭皓認為現在是估值低基期，左側投資者仍可按策略持倉。
+      </p>
+    </div>
+
+    <!-- 大盤觀點 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>大盤觀點</div>
+      <div class="outlook-badge bull">▲ 偏多，高乖離留意節奏</div>
+      <p>
+        標普本益比回到 2022 年低點，基期、估值、情緒指標 3 月已一次性到位，支撐多頭中長期邏輯。短期股價乖離率快速拉高，不建議追高加碼，有倉位者讓獲利奔跑；左側投資者靜待下一輪回測機會。市場交易的是「川普有壓力、有誘因促成停火」的預期，而非真實風險已消。
+      </p>
+    </div>
+
+    <!-- 重點速覽 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>重點速覽</div>
+      <table>
+        <thead>
+          <tr>
+            <th>指數／資產</th>
+            <th>漲跌幅</th>
+            <th>收盤</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>道瓊</td><td class="up">+317 點 / +0.66%</td><td>48,535</td></tr>
+          <tr><td>標普 500</td><td class="up">+1.18%（距新高 12 點）</td><td>6,967</td></tr>
+          <tr><td>那斯達克</td><td class="up">+1.96%（連 10 日收紅）</td><td>23,639</td></tr>
+          <tr><td>費半</td><td class="up">+2.04% 🔴歷史新高</td><td>9,224</td></tr>
+          <tr><td>台股</td><td class="up">+373 點 🔴歷史新高</td><td>36,669</td></tr>
+          <tr><td>台積電</td><td class="up">🔴歷史新高</td><td>2,070</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 關鍵觀察 -->
+    <div class="card">
+      <div class="card-label"><span class="dot"></span>關鍵觀察</div>
+      <ul class="obs-list">
+        <li>
+          <span class="obs-num">1</span>
+          <span><span class="obs-topic">PPI 低於預期，市場提前慶祝</span> — 月增 0.5%（預期 1.1%），年增 4%（預期 4.6%）。通膨仍在擴散，但「沒有想像中嚴重」已足以帶動股市大漲。</span>
+        </li>
+        <li>
+          <span class="obs-num">2</span>
+          <span><span class="obs-topic">台股六項歷史新高</span> — 加權指數、貴買指數、上市市值（118 兆）、上市櫃市值（128 兆）、台積電股價（2,055）、台指期（36,430）同步刷新。</span>
+        </li>
+        <li>
+          <span class="obs-num">3</span>
+          <span><span class="obs-topic">大戶回流＋金管會鬆綁</span> — Q1 五億以上大戶人數年增 33%，中實戶增 40%；外國直債納入擔保品，預估釋放 3,000 億活水。</span>
+        </li>
+        <li>
+          <span class="obs-num">4</span>
+          <span><span class="obs-topic">能源供應鏈轉向美國</span> — 台灣氦氣從卡達轉美；美油出口 4 月達 520 萬桶/天，月增近三成，亞洲需求暴增 82%。台化、台塑石化產能剩三成，五六月採購能見度不明。</span>
+        </li>
+        <li>
+          <span class="obs-num">5</span>
+          <span><span class="obs-topic">美國消費正在透支</span> — 個人所得 MOM -0.1%，PCE 仍 +0.5%；民眾靠積蓄、信用卡、資產效果撐支出，實質薪資已重度衰退，聯準會幾乎無緊縮空間。</span>
+        </li>
+        <li>
+          <span class="obs-num">6</span>
+          <span><span class="obs-topic">台灣貧富差距超越日韓</span> — 高成長低通膨背後是政府補貼效果；半導體薪資飛漲，餐飲業年薪僅 30 萬，貧富差距今年排全球第 12，首次超越日本與韓國。</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
+  </div>
+  <!-- ／Episode: 2026-04-15 -->
+
+</div>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.ep-tab');
+  const episodes = document.querySelectorAll('.episode');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      episodes.forEach(e => e.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.ep).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
