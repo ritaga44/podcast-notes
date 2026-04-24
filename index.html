@@ -27,7 +27,7 @@
     .site-header h1 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
     .site-header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
 
-    /* ── Episode nav ── */
+    /* ── Week nav ── */
     .ep-tabs {
       background: #fff;
       border-bottom: 1px solid #e8e8e8;
@@ -58,6 +58,33 @@
       padding: 32px 24px 80px;
     }
 
+    /* ── Week block ── */
+    .week { display: none; }
+    .week.active { display: block; }
+
+    /* ── Day divider ── */
+    .day-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 44px 0 20px;
+    }
+    .day-divider:first-child { margin-top: 0; }
+    .day-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .day-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+
     /* ── Episode header ── */
     .ep-meta {
       display: flex;
@@ -65,17 +92,10 @@
       gap: 10px;
       margin-bottom: 6px;
     }
-    .ep-meta .podcast-name {
-      font-size: 12px;
-      color: #888;
-      font-weight: 500;
-    }
-    .ep-meta .ep-date {
-      font-size: 12px;
-      color: #aaa;
-    }
+    .ep-meta .podcast-name { font-size: 12px; color: #888; font-weight: 500; }
+    .ep-meta .ep-date { font-size: 12px; color: #aaa; }
     .ep-title {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
       line-height: 1.3;
       margin-bottom: 4px;
@@ -84,7 +104,7 @@
     .ep-host {
       font-size: 13px;
       color: #888;
-      margin-bottom: 28px;
+      margin-bottom: 22px;
     }
 
     /* ── Cards ── */
@@ -92,7 +112,7 @@
       background: #fff;
       border-radius: 12px;
       padding: 22px 24px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border: 1px solid #ebebeb;
     }
     .card-label {
@@ -129,9 +149,9 @@
       border-radius: 20px;
       margin-bottom: 10px;
     }
-    .outlook-badge.bull { background: #e8f5e9; color: #2e7d32; }
-    .outlook-badge.bear { background: #fce4ec; color: #c62828; }
-    .outlook-badge.neutral { background: #f3f4f6; color: #555; }
+    .outlook-badge.bull   { background: #e8f5e9; color: #2e7d32; }
+    .outlook-badge.bear   { background: #fce4ec; color: #c62828; }
+    .outlook-badge.neutral{ background: #f3f4f6; color: #555; }
 
     /* ── Table ── */
     table {
@@ -156,7 +176,7 @@
       color: #333;
     }
     tr:last-child td { border-bottom: none; }
-    .up { color: #2e7d32; font-weight: 600; }
+    .up   { color: #2e7d32; font-weight: 600; }
     .down { color: #c62828; font-weight: 600; }
     .flat { color: #888; }
 
@@ -182,22 +202,15 @@
       display: flex; align-items: center; justify-content: center;
       margin-top: 1px;
     }
-    .obs-topic {
-      font-weight: 600;
-      color: #1a1a1a;
-    }
+    .obs-topic { font-weight: 600; color: #1a1a1a; }
 
     /* ── Footer ── */
     .disclaimer {
       text-align: center;
       font-size: 11px;
       color: #bbb;
-      margin-top: 40px;
+      margin-top: 36px;
     }
-
-    /* ── Hidden episodes ── */
-    .episode { display: none; }
-    .episode.active { display: block; }
   </style>
 </head>
 <body>
@@ -210,47 +223,31 @@
   </div>
 </header>
 
-<!-- Episode tab navigation -->
+<!-- Week tab navigation -->
 <nav class="ep-tabs" id="epTabs">
-  <div class="ep-tab active" data-ep="ep20260424">2026-04-24</div>
-  <div class="ep-tab" data-ep="ep20260423">2026-04-23</div>
-  <div class="ep-tab" data-ep="ep20260422">2026-04-22</div>
-  <div class="ep-tab" data-ep="ep20260421">2026-04-21</div>
-  <div class="ep-tab" data-ep="ep20260420">2026-04-20</div>
-  <div class="ep-tab" data-ep="ep20260417">2026-04-17</div>
-  <div class="ep-tab" data-ep="ep20260416">2026-04-16</div>
-  <div class="ep-tab" data-ep="ep20260415">2026-04-15</div>
+  <div class="ep-tab active" data-ep="week20260420">4/20–4/24 週</div>
+  <div class="ep-tab"        data-ep="week20260414">4/14–4/18 週</div>
 </nav>
 
 <div class="container">
 
   <!-- ══════════════════════════════════════════
-       Episode: 2026-04-16
+       Week: 2026-04-20 ~ 2026-04-24
   ══════════════════════════════════════════ -->
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-23
-  ══════════════════════════════════════════ -->
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-24
-  ══════════════════════════════════════════ -->
-  <div class="episode active" id="ep20260424">
+  <div class="week active" id="week20260420">
 
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-24（五）</span>
-    </div>
+    <!-- ── 04/24 ── -->
+    <div class="day-divider"><span class="day-label">04/24 （五）</span></div>
+
     <h2 class="ep-title">費半連 17 紅首站萬點里程碑<br>——三大指數收黑，硬體 AI 確定性獨強</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦費半指數以 +169 點（+1.71%）收 10,078，連 17 個交易日收紅，創 1994 年以來最長連漲紀錄，並首度站上萬點大關，成為本輪 AI 牛市的結構性里程碑。然而三大指數同步收黑——道瓊 -179 點（49,310）、標普 -29 點（7,108）、那斯達克 -219 點（24,438）——呈現典型軟硬體分化格局：硬體（費半、台積電供應鏈）需求能見度高，軟體估值偏貴，資金主動輪動。台股逆勢大漲 720 點收 38,434，再創歷史新高。地緣政治方面，伊朗談判代表突然宣布退出談判桌，美伊和談再生變數，市場反應有限但潛在尾部風險升溫。企業財報面，特斯拉 Q1 EPS 僅 0.25 美元，連續四季低於市場預期，馬斯克重心轉向 AI 與政治引發投資人疑慮。台灣基本面亮眼：3 月外銷訂單首度突破 900 億美元（年增 65.9%），AI 相關供應鏈需求旺盛成核心驅動力。金融政策方面，金管會宣布 ETF 單一成分股持股上限由 10% 提升至 25%，主動型 ETF 今年以來平均報酬達 +43%；金管會同步推進「三條線」政策目標打造亞洲資產管理中心，吸引境外資金留台。游庭皓以鼎泰豐美國門市競爭力為例延伸討論台灣品牌軟實力，並點出費半萬點意義在於確立 AI 算力時代的「硬體優先」投資邏輯。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，硬體 AI 確定性勝過軟體高估值</div>
@@ -258,18 +255,10 @@
         費半站上萬點是本輪牛市的結構確認訊號，台股與費半同步強勢印證 AI 硬體供應鏈需求的高能見度。三大指數收黑為正常高位輪動，非趨勢轉向。短線注意伊朗談判破裂的尾部風險；中長線 AI 算力缺口至 2028 年仍不可能填滿，硬體優先邏輯繼續成立。金管會 ETF 鬆綁將加速資金集中至台股核心標的，有助指數支撐。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>費半</td><td class="up">+1.71% 🔴連 17 紅，首站萬點</td><td>10,078</td></tr>
           <tr><td>道瓊</td><td class="down">−0.36%</td><td>49,310</td></tr>
@@ -280,63 +269,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">費半萬點里程碑</span> — 連 17 紅創 1994 年以來最長紀錄，首度站上 10,000 點，確立 AI 算力硬體時代的結構性牛市；費半強勢 vs 三大指數收黑，資金主動向硬體確定性集中。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">軟硬體分化格局成形</span> — 那斯達克軟體類股高估值受壓，費半、台積電供應鏈等硬體標的需求能見度清晰；游庭皓點出這是結構輪動而非空頭訊號。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">伊朗談判代表退出</span> — 美伊和談再生變數，荷莫茲風險再度升溫；短期尾部風險須留意，但市場習慣化後反應趨於有限。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">特斯拉 EPS 連四季低於預期</span> — Q1 僅 0.25 美元；馬斯克重心持續轉向 AI 與政治事務，本業競爭力備受質疑，中國電動車壓力未減。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">台灣外銷訂單首破 900 億美元</span> — 3 月年增 65.9%，AI 伺服器、先進封裝相關訂單暴增為主引擎；台股新高有基本面支撐，非純資金行情。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">金管會 ETF 雙重鬆綁</span> — 單一成分股持股上限 10%→25%，集中度提升利好大型核心股；主動型 ETF 今年平均 +43%；三條線政策推動亞洲資管中心，境外資金留台機制加速成形。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">費半萬點里程碑</span> — 連 17 紅創 1994 年以來最長紀錄，首度站上 10,000 點，確立 AI 算力硬體時代的結構性牛市；費半強勢 vs 三大指數收黑，資金主動向硬體確定性集中。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">軟硬體分化格局成形</span> — 那斯達克軟體類股高估值受壓，費半、台積電供應鏈等硬體標的需求能見度清晰；游庭皓點出這是結構輪動而非空頭訊號。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">伊朗談判代表退出</span> — 美伊和談再生變數，荷莫茲風險再度升溫；短期尾部風險須留意，但市場習慣化後反應趨於有限。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">特斯拉 EPS 連四季低於預期</span> — Q1 僅 0.25 美元；馬斯克重心持續轉向 AI 與政治事務，本業競爭力備受質疑，中國電動車壓力未減。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">台灣外銷訂單首破 900 億美元</span> — 3 月年增 65.9%，AI 伺服器、先進封裝相關訂單暴增為主引擎；台股新高有基本面支撐，非純資金行情。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">金管會 ETF 雙重鬆綁</span> — 單一成分股持股上限 10%→25%，集中度提升利好大型核心股；主動型 ETF 今年平均 +43%；三條線政策推動亞洲資管中心，境外資金留台機制加速成形。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-24 -->
+    <!-- ── 04/23 ── -->
+    <div class="day-divider"><span class="day-label">04/23 （四）</span></div>
 
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-23
-  ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260423">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-23（四）</span>
-    </div>
     <h2 class="ep-title">費半連漲 16 日創 1994 年紀錄<br>——台股衝破 38,000，市場得了「下跌有限的病」</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦費半連漲 16 個交易日（1994 年來最長）、4 月有望創 2000 年來最大單月漲幅；台股 4 月已漲 6,155 點，逼近史上最強單月紀錄，盤中突破 38,000 點。儘管油價重站 100 美元、荷莫茲未重開，股市繼續創歷史新高，市場得了「下跌有限的病」。地緣政治方面，伊朗升級行動——扣留商船、派 VLCC 試圖突破美軍封鎖線，核濃縮鈾庫存數據出現真空，核談判仍無共識。川習會將於 5 月登場，伊朗問題未解使美方籌碼不足，台灣問題預料成談判變數；美光同步推動 Mech 法案，鎖定長江存儲、中芯國際進行科技管制。日本方面，本集帶出二戰以來最大政策轉向：允許輸出殺傷性武器、造船業倍增計畫，日本 70 歲以上老年人破產激增，40 歲以下資產低於 100 萬日元者 20 年增近 3 倍。烏克蘭人力危機：18–60 歲男性從 870 萬降至 500 萬，考慮擴大動員女性。中國紅色半導體供應鏈加速成形，製程設備國產化率從 7% 升至 21%，策略轉向「打造自主可運轉系統」而非追求最先進製程。游庭皓以「供給受限牛市」詮釋當前行情——算力永遠不夠、資料中心 2028 年前蓋不完，AI 泡沫破滅條件不成立；投資哲學收尾：熬過每次外部衝擊，才有資格享受獲利奔跑。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 強勢偏多，享受獲利奔跑</div>
@@ -344,18 +300,10 @@
         四大指數與台股同步創歷史新高，市場進入「下跌有限」的慣性。AI 供給受限牛市結構完整——算力缺口至少延伸至 2028 年，EPS 持續上修，本益比仍受控。油價 100 美元與股市創高並存，反映市場已接受中東常態化。游庭皓提醒：現在是享受獲利奔跑的階段，等待下一輪外部衝擊造成基期下滑，才是下次加碼最好時機。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="up">+0.69%</td><td>49,490</td></tr>
           <tr><td>標普 500</td><td class="up">+1.05% 🔴歷史新高</td><td>7,137</td></tr>
@@ -366,63 +314,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">AI 供給受限牛市</span> — 算力需求遠超供給，資料中心 2028 年前蓋不完；泡沫破滅的前提是算力過剩，目前條件不成立，4C 行情仍有支撐。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">伊朗升級挑釁</span> — 扣留商船、VLCC 試圖突破美軍封鎖；核濃縮鈾庫存數據真空，談判底線未達，中東「常態化」被市場接受但風險未除。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">川習會籌碼博弈</span> — 5 月登場前雙方提前佈局：美光推 Mech 法案管制長江存儲／中芯，台灣問題預料成談判變數，北京以「穩定」形象占據道德高地。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">日本二戰後最大政策轉向</span> — 開放輸出殺傷性武器、造船業倍增計畫；老年破產激增，日元貶值引發 Sugar Daddy 現象，社會結構壓力持續累積。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">烏克蘭人力告急</span> — 18–60 歲男性剩 500 萬（戰前 870 萬），考慮動員女性；烏俄戰事進入第 5 年，歐洲全面加速軍工與能源轉型投資。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">中國紅色供應鏈成形</span> — 製程設備國產化率從 7% 升至 21%；策略轉向「自主可運轉系統」（中維、北方華創、中芯、長江存儲、華大九天），不再追求 EUV 突破。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">AI 供給受限牛市</span> — 算力需求遠超供給，資料中心 2028 年前蓋不完；泡沫破滅的前提是算力過剩，目前條件不成立，4C 行情仍有支撐。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">伊朗升級挑釁</span> — 扣留商船、VLCC 試圖突破美軍封鎖；核濃縮鈾庫存數據真空，談判底線未達，中東「常態化」被市場接受但風險未除。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">川習會籌碼博弈</span> — 5 月登場前雙方提前佈局：美光推 Mech 法案管制長江存儲／中芯，台灣問題預料成談判變數，北京以「穩定」形象占據道德高地。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">日本二戰後最大政策轉向</span> — 開放輸出殺傷性武器、造船業倍增計畫；老年破產激增，日元貶值引發 Sugar Daddy 現象，社會結構壓力持續累積。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">烏克蘭人力告急</span> — 18–60 歲男性剩 500 萬（戰前 870 萬），考慮動員女性；烏俄戰事進入第 5 年，歐洲全面加速軍工與能源轉型投資。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">中國紅色供應鏈成形</span> — 製程設備國產化率從 7% 升至 21%；策略轉向「自主可運轉系統」（中維、北方華創、中芯、長江存儲、華大九天），不再追求 EUV 突破。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-23 -->
+    <!-- ── 04/22 ── -->
+    <div class="day-divider"><span class="day-label">04/22 （三）</span></div>
 
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-22
-  ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260422">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-22（三）</span>
-    </div>
     <h2 class="ep-title">川普宣佈無限期延長停火<br>——費半逆勢創高，多空訊號趨於平衡</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦川普宣佈無限期延長對伊朗停火協議，市場短線鬆口氣，油價回跌、股市回穩，但結構問題未解——伊朗拒絕第二輪談判、JD Vance 未啟程，「邊封鎖邊談判」成為新常態。亞洲能源壓力持續升高：印度即將迎來四年來首次柴油全面漲價，中國 10 億桶戰略儲備不願釋放，俄羅斯緩衝縮水。荷莫茲每日運量 2,090 萬桶為全球第二大、無可替代，川普同步動用國防生產法宣佈能源為國安層級，加速頁岩油氣供應。聯準會人事方面，Kevin Warsh（沃許）參議院聽證受矚目：個人資產 1.3–2 億美元、反對公佈點陣圖、主張縮減資產負債表，鷹派背景轉向鴿派引發市場質疑；但公債殖利率平穩，市場對其獨立性仍有信心。技術面，三大指數收跌，費半逆勢再創歷史新高，RSI 過熱、乖離偏高，多空訊號趨於平衡，游庭皓提醒勿過度貪心。蘋果方面，庫克宣佈 9 月交棒特納斯（Ternus），iPhone 折疊機 2026 年成轉捩點，預估直接搶走 20% 市占。中國科技出口方面，電動車、鋰電池、太陽能 3 月同創歷史新高，寧德時代發佈 1,500 公里續航、6 分鐘快充新電池；西方車廠反向學習中國技術，但游庭皓以京東方為例指出「政治勝利 ≠ 商業勝利」，中國產業最終輸出通縮反沖銷通膨壓力。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge neutral">▶ 中性，守住獲利、等待回檔</div>
@@ -430,18 +345,10 @@
         三大指數收跌、乖離回修屬健康現象。多頭訊號（年線回升、廣度擴散、VIX 壓低）與空頭訊號（RSI 過熱、無回檔直線上漲、停火不穩）同時存在。游庭皓提醒：漲幅已遠超年化均值，不是看空，而是要守住已賺到的；等待「技術回檔＋本益比同步下滑」的雙低交叉點，才是最佳加碼時機。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="down">−0.59%</td><td>49,149</td></tr>
           <tr><td>標普 500</td><td class="down">−0.63%</td><td>7,064</td></tr>
@@ -451,63 +358,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">停火無限期延長，風險攤平成時間成本</span> — 川普宣佈無限期延長停火，伊朗拒絕談判、JD Vance 未出發。「邊封鎖邊談判」成新常態，原油壓力被拉長而非解除。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">亞洲能源缺口擴大</span> — 印度四年來首次柴油漲價，中國 10 億桶戰略儲備不釋放，俄羅斯油品緩衝縮水。荷莫茲日運量 2,090 萬桶，無替代方案。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">沃許（Warsh）聽證受矚</span> — 個人資產達 2 億美元（60 億台幣）、反對點陣圖、主張縮表；鷹轉鴿引發動機質疑，但公債殖利率平穩顯示市場尚有信心。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">多空訊號平衡，守住獲利</span> — RSI 過熱、直線上漲無回檔、小型股創高後易整理；現階段漲幅遠超年化均值，不是看空，是提醒勿過度追高。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">蘋果換帥，折疊機成轉捩點</span> — 庫克 9 月交棒特納斯，新任 CEO 主導 iPhone 折疊機；IDC 預估蘋果一進場直奪 20% 市占、34% 市場價值，平均售價 2,400 美元為一般機三倍。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">中國輸出通縮抵消通膨</span> — 電動車、鋰電池、太陽能出口 3 月同創新高；寧德時代 1,500 公里續航、6 分鐘快充；但以京東方為鑑——政治市占勝利後產能過剩、獲利稀薄，最終輸出通縮沖銷中東通膨壓力。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">停火無限期延長，風險攤平成時間成本</span> — 川普宣佈無限期延長停火，伊朗拒絕談判、JD Vance 未出發。「邊封鎖邊談判」成新常態，原油壓力被拉長而非解除。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">亞洲能源缺口擴大</span> — 印度四年來首次柴油漲價，中國 10 億桶戰略儲備不釋放，俄羅斯油品緩衝縮水。荷莫茲日運量 2,090 萬桶，無替代方案。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">沃許（Warsh）聽證受矚</span> — 個人資產達 2 億美元（60 億台幣）、反對點陣圖、主張縮表；鷹轉鴿引發動機質疑，但公債殖利率平穩顯示市場尚有信心。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">多空訊號平衡，守住獲利</span> — RSI 過熱、直線上漲無回檔、小型股創高後易整理；現階段漲幅遠超年化均值，不是看空，是提醒勿過度追高。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">蘋果換帥，折疊機成轉捩點</span> — 庫克 9 月交棒特納斯，新任 CEO 主導 iPhone 折疊機；IDC 預估蘋果一進場直奪 20% 市占、34% 市場價值，平均售價 2,400 美元為一般機三倍。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">中國輸出通縮抵消通膨</span> — 電動車、鋰電池、太陽能出口 3 月同創新高；寧德時代 1,500 公里續航、6 分鐘快充；但以京東方為鑑——政治市占勝利後產能過剩、獲利稀薄，最終輸出通縮沖銷中東通膨壓力。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-22 -->
+    <!-- ── 04/21 ── -->
+    <div class="day-divider"><span class="day-label">04/21 （二）</span></div>
 
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-21
-  ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260421">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-21（二）</span>
-    </div>
     <h2 class="ep-title">費半連 14 日創新高，台股 ETF 破 5 兆<br>——AI 建不完，核能與量子態海峽</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦費半連 14 日創歷史新高（2014 年來最長紀錄），那斯達克終於小幅休息。中東方面，荷莫茲繼續維持「量子疊加態」，Polymarket 4 月底永久和平機率僅剩 24%；但台塑油輪已成功突圍，200 萬桶沙烏地原油預計 5 月初抵台，為臺灣補上約兩周原油需求。台股 ETF 規模突破 5 兆台幣，不到 4 個月增加 1.17 兆，超越去年全年。金管會雙重鬆綁：開放以美元配息吸引外資、外國直債（Triple B 以上）可質押做台股擔保品，台股美元化進程加速。估值面，七巨頭相對其他 493 成分股溢價從 100% 降至 34%，PEG 指標降至 0.7（2011 年歐債危機水準），游庭皓認為仍是左側布建邏輯。AI 資料中心建設障礙全面浮現：變壓器短缺、電網不足、Not In My Backyard 電費民怨蔓延至搖擺州，今年建制達標率估計最多 8 成；川普啟動國家太空核能計畫，中國核電在建規模達美國 1.3 倍，核能重回能源核心。AI 衝擊娛樂業部分，韓國 Galaxy Group 打造 AI 偶像，愛奇藝宣示以 AI 全流程生產影視，中國微短劇模式加速滲透社群平台。最後美銀提出未來 5 年 4C 投資主軸：Curve（殖利率曲線）、China、Consumer、Chips。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，台股新位階千點波動屬正常</div>
@@ -515,18 +389,10 @@
         費半強勢領漲，台股 ETF 資金持續湧入，金管會積極鬆綁提供增量活水。估值 PEG 回到 0.7 的歷史低位，左側邏輯仍成立。短期乖離偏高，等待市場恐慌加上基期同步下滑的「雙低」交叉點，才是最佳加碼時機。AI 資料中心電力瓶頸短期抑制估值泡沫，反而有助延長多頭周期。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="flat">−0.009%</td><td>49,442</td></tr>
           <tr><td>標普 500</td><td class="down">−0.24%</td><td>7,109</td></tr>
@@ -536,63 +402,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">台塑油輪突圍成功</span> — 200 萬桶沙烏地原油預計 5 月初抵麥寮港，補上臺灣約兩周原油需求；臺灣能源供應鏈加速轉向美國與澳洲。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">台股 ETF 破 5 兆，速度失控</span> — 不到 4 個月增加 1.17 兆，超越去年全年；主動型 ETF 崛起，資金下沉至興櫃，金管會態度積極助攻。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">金管會雙重鬆綁</span> — 開放美元直接配息（吸引外資免換匯）＋外國直債 Triple B 以上可質押做台股擔保品，預估釋放 3,000 億活水，台股美元化進程加速。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">估值 PEG 降至 0.7</span> — 七巨頭溢價從 100% 降至 34%，PEG 回到 2011 年歐債危機水準；AI 成長速度讓本益比基期瞬間打低，左側布建邏輯仍成立。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">AI 資料中心建不完</span> — 變壓器短缺、電網不足、Not In My Backyard 電費民怨，今年資料中心有一半延後、1/3 取消；Open AI 宣佈暫停英國大型資料中心計畫，今年達標率估最多 8 成。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">核能 ＋ 美銀 4C 主軸</span> — 川普啟動國家太空核能計畫，中國在建核電達美國 1.3 倍；美銀提出未來 5 年 4C：Curve、China（嚴重低估）、Consumer、Chips。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">台塑油輪突圍成功</span> — 200 萬桶沙烏地原油預計 5 月初抵麥寮港，補上臺灣約兩周原油需求；臺灣能源供應鏈加速轉向美國與澳洲。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">台股 ETF 破 5 兆，速度失控</span> — 不到 4 個月增加 1.17 兆，超越去年全年；主動型 ETF 崛起，資金下沉至興櫃，金管會態度積極助攻。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">金管會雙重鬆綁</span> — 開放美元直接配息（吸引外資免換匯）＋外國直債 Triple B 以上可質押做台股擔保品，預估釋放 3,000 億活水，台股美元化進程加速。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">估值 PEG 降至 0.7</span> — 七巨頭溢價從 100% 降至 34%，PEG 回到 2011 年歐債危機水準；AI 成長速度讓本益比基期瞬間打低，左側布建邏輯仍成立。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">AI 資料中心建不完</span> — 變壓器短缺、電網不足、Not In My Backyard 電費民怨，今年資料中心有一半延後、1/3 取消；Open AI 宣佈暫停英國大型資料中心計畫，今年達標率估最多 8 成。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">核能 ＋ 美銀 4C 主軸</span> — 川普啟動國家太空核能計畫，中國在建核電達美國 1.3 倍；美銀提出未來 5 年 4C：Curve、China（嚴重低估）、Consumer、Chips。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-21 -->
+    <!-- ── 04/20 ── -->
+    <div class="day-divider"><span class="day-label">04/20 （一）</span></div>
 
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-20
-  ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260420">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-20（一）</span>
-    </div>
     <h2 class="ep-title">薛丁格的海峽開了又關<br>——標普站上 7,100，通膨外溢全面發威</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦「薛丁格的海峽」：週末荷莫茲海峽一度短暫開放（12艘商船離港），隨即再封鎖，美軍截停伊朗旗幟貨船，布蘭特原油盤中暴漲 7%，亞洲現貨油價已達 180–200 美元/桶，遠高於期貨報價。Polymarket 美伊永久和平機率從 65% 大幅下滑至 35%。儘管地緣政治再起波瀾，美股週五仍強勢收高，標普首度站上 7,100 點（+1.2%），那斯達克與費半皆創歷史新高，連續 13 個交易日收紅。通膨外溢效應方面，美國 48 州 60% 地區陷入乾旱影響農糧，全球航空業燃油成本暴增 40–50% 致縮班潮，VLCC 運費達每桶 15 美元創歷史高位，農業軟性商品棉花、玉米、小麥同步上漲。川普民調方面，總支持率跌至 40%、通膨滿意度淨值 -40%，第二任下滑速度比第一任更快，游庭皓認為這是市場相信川普有誘因儘快和談的根本來源。關稅方面，57 項威脅中實際落地僅 8 項，每週關稅以 0.1–0.2% 速度下降，說明關稅從未真正全面施行，對通膨的傳導力有限。最後以「倖存者偏差」為題，說明為何選擇 ETF 而非押注單一個股穿越長週期。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，高乖離等回測</div>
@@ -600,18 +433,10 @@
         美股四大指數同步創高，本益比仍處低基期，長期資產配置者難以虧損。惟那斯達克與費半已連漲 13 日、乖離明顯偏高，搭配中東再生變數，短期回測需求健康正常。游庭皓建議：已有部位者讓獲利奔跑，等待乖離收斂後再評估加碼；川普民調壓力將持續逼迫和談，中長線多頭邏輯未變。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="up">+1.79%</td><td>49,447</td></tr>
           <tr><td>標普 500</td><td class="up">+1.2% 🔴歷史新高</td><td>7,126</td></tr>
@@ -622,63 +447,40 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">薛丁格的海峽</span> — 週末短暫開放後再封鎖，美軍截停伊朗貨船，印度油輪遭示警開槍。Polymarket 和平機率從 65% 跌至 35%，雙方皆在為第二輪談判累積籌碼。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">油價期現貨嚴重脫節</span> — 布蘭特期貨 80–90 美元，亞洲現貨到岸價已達 180–200 美元；VLCC 波斯灣→日本運費每桶 15 美元，創多年新高。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">通膨外溢全面發威</span> — 美國 60% 地區乾旱影響農糧；全球航空業燃油成本 +40–50%，多家航空公司縮班；棉花、玉米、小麥、天然氣同步上漲。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">川普民調全面崩跌</span> — 總支持率 40%、不支持 56%；通膨滿意度淨值 -40%；第二任下滑速度快於第一任，政治壓力倒逼和談為市場多頭的核心信心來源。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">關稅落地率僅 14%</span> — 57 項威脅實際施行 8 項，21 項未落地；中國電子零件關稅多已取消，說明關稅是籌碼而非終局，對通膨傳導力有限。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">投資哲學：倖存者偏差</span> — 巴菲特、個股神話皆屬歷史篩選後的少數樣本；AI 時代選擇 ETF 分散，不押注單一個股能否穿越 50 年長週期，是更理性的資產配置邏輯。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">薛丁格的海峽</span> — 週末短暫開放後再封鎖，美軍截停伊朗貨船，印度油輪遭示警開槍。Polymarket 和平機率從 65% 跌至 35%，雙方皆在為第二輪談判累積籌碼。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">油價期現貨嚴重脫節</span> — 布蘭特期貨 80–90 美元，亞洲現貨到岸價已達 180–200 美元；VLCC 波斯灣→日本運費每桶 15 美元，創多年新高。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">通膨外溢全面發威</span> — 美國 60% 地區乾旱影響農糧；全球航空業燃油成本 +40–50%，多家航空公司縮班；棉花、玉米、小麥、天然氣同步上漲。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">川普民調全面崩跌</span> — 總支持率 40%、不支持 56%；通膨滿意度淨值 -40%；第二任下滑速度快於第一任，政治壓力倒逼和談為市場多頭的核心信心來源。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">關稅落地率僅 14%</span> — 57 項威脅實際施行 8 項，21 項未落地；中國電子零件關稅多已取消，說明關稅是籌碼而非終局，對通膨傳導力有限。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">投資哲學：倖存者偏差</span> — 巴菲特、個股神話皆屬歷史篩選後的少數樣本；AI 時代選擇 ETF 分散，不押注單一個股能否穿越 50 年長週期，是更理性的資產配置邏輯。</span></li>
       </ul>
     </div>
 
     <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
   </div>
-  <!-- ／Episode: 2026-04-20 -->
+  <!-- ／Week: 2026-04-20 ~ 2026-04-24 -->
+
 
   <!-- ══════════════════════════════════════════
-       Episode: 2026-04-17
+       Week: 2026-04-14 ~ 2026-04-18
   ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260417">
+  <div class="week" id="week20260414">
 
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-17（五）</span>
-    </div>
+    <!-- ── 04/17 ── -->
+    <div class="day-divider"><span class="day-label">04/17 （五）</span></div>
+
     <h2 class="ep-title">台積電 Q1 法說全面超預期<br>——毛利率 66%，AI 營收三年六倍</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓以台積電 2026 年第一季法說為主軸，深度拆解財報亮點：單季營收 1 兆 1,134 億（年增 35%）、稅後純益 5,724 億（年增 58%）、EPS 22.08 元，毛利率高達 66.2%，全數超越市場預期。台積電 ADR 法說後下跌 3%，游庭皓解讀為高乖離下的「利多出盡」正常調節，非基本面轉差。結構面，高速運算占比已達 61%，手機降至 26%，AI 相關營收預估從 24 年 150 億美元成長至 27 年 850 億，三年六倍；先進製程（≤7nm）貢獻逾 70% 營收。資本支出方面，台積電進入「高 CAPEX 但不失控」新階段，560 億美元、70–80% 投入先進製程，相較競爭對手已拉開 5–10 年製程距離。Stargate 計畫 5,000 億美元全面開工、預計蓋至 2030 年，確立 AI 基建需求能見度。估值面，費半與輝達前瞻本益比已回落至 2022 年低點，EPS 增速快於股價，游庭皓認為目前並非泡沫，仍以左側邏輯看待。台灣股市市值（4.14 兆美元）首度超越英國，成全球第七大市場。最後導讀書籍《你不該看到的金融真相》，提醒不能用消費性電子循環的舊框架來看待 AI 這場結構性革命。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，短線乖離消化中</div>
@@ -686,18 +488,10 @@
         美股持續創高，AI 基建訂單能見度延伸至 2030 年，台積電長期基本面無虞。短期台積電及費半乖離率偏高，法說後進入震盪消化期屬正常。費半與輝達前瞻本益比回到近年低點，左側投資者邏輯完整；右側追價者需留意短線波動放大風險。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="up">+0.20%</td><td>48,578</td></tr>
           <tr><td>標普 500</td><td class="up">+0.26%</td><td>7,041</td></tr>
@@ -709,60 +503,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">台積電財報全面超預期</span> — Q1 毛利率 66.2%、EPS 22.08 元、稅後純益年增 58%，所有指標創歷史新高。ADR 下跌屬高乖離下正常調節。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">AI 重塑營收結構</span> — 高速運算占比升至 61%，手機降至 26%；AI 相關營收 24 年 150 億→27 年 850 億美元，三年六倍。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">台灣股市成全球第七</span> — 總市值 4.14 兆美元首度超越英國，科技循環帶動估值快速重估。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">CAPEX 進入不失控新階段</span> — 資本支出 560 億美元，較競爭對手領先 5–10 年，無須瘋狂擴張；股東回饋空間提升。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">Stargate 確立需求能見度</span> — 5,000 億美元計畫全面開工，預計至 2030 年完工，AI 基建拉貨潮至少延伸 4 年。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">估值並不貴</span> — 費半、輝達前瞻本益比回落至 2022 年低點，EPS 增速快於股價；不能用消費性電子循環框架看 AI 結構性革命。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">台積電財報全面超預期</span> — Q1 毛利率 66.2%、EPS 22.08 元、稅後純益年增 58%，所有指標創歷史新高。ADR 下跌屬高乖離下正常調節。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">AI 重塑營收結構</span> — 高速運算占比升至 61%，手機降至 26%；AI 相關營收 24 年 150 億→27 年 850 億美元，三年六倍。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">台灣股市成全球第七</span> — 總市值 4.14 兆美元首度超越英國，科技循環帶動估值快速重估。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">CAPEX 進入不失控新階段</span> — 資本支出 560 億美元，較競爭對手領先 5–10 年，無須瘋狂擴張；股東回饋空間提升。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">Stargate 確立需求能見度</span> — 5,000 億美元計畫全面開工，預計至 2030 年完工，AI 基建拉貨潮至少延伸 4 年。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">估值並不貴</span> — 費半、輝達前瞻本益比回落至 2022 年低點，EPS 增速快於股價；不能用消費性電子循環框架看 AI 結構性革命。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-17 -->
+    <!-- ── 04/16 ── -->
+    <div class="day-divider"><span class="day-label">04/16 （四）</span></div>
 
-  <div class="episode" id="ep20260416">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-16（四）</span>
-    </div>
     <h2 class="ep-title">戰爭沒結束，但市場已慶祝<br>——標普站上 7,000 點</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓從「戰爭未結束，市場已慶祝」切入，分析標普500創下7,000點歷史新高、那斯達克同步創高背後的驅動力——並非風險全面消退，而是CTA量化趨勢資金的機械性追高，以及空單被迫回補。接著剖析荷莫茲海峽僵局：Polymarket預測美伊4月底達協議機率已升至38%，但核計畫與能源控制權分歧仍大。美中博弈方面，川普去信習近平要求停止對伊武援，金融時報更指伊朗已取得中國T101B偵察衛星用於監控美軍基地，衝突層次從飛彈戰升級至太空情報整合。台股日均成交量達9,400億，第一季累計證交稅1,237億創20年最快增速，兆元成交量逐漸成新常態。AI面向聚焦艾思摩爾（ASML）上調全年財測至3,600–4,000億歐元，以及AI法律戰全面開打——紐時 vs OpenAI、馬斯克告科羅拉多州、AI音樂授權談判破裂，監管是否跟上商業模式成為本輪AI行情的核心變數。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，注意波動</div>
@@ -770,18 +534,10 @@
         市場情緒從「強制賣出」翻轉為「強制追買」，CTA動能資金短期預計加碼數百億美元。標普500已突破八大投顧Q2目標區間，台股37,000點在望。惟油價高檔、戰事未定，股市已領先忽略風險，建議採「雙尾佈局」——右側買納指／費半捕捉AI動能，左側以VIX期權對沖尾部風險。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="down">−0.15%</td><td>48,463</td></tr>
           <tr><td>標普 500</td><td class="up">+0.80% 🔴歷史新高</td><td>7,000+</td></tr>
@@ -791,63 +547,30 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">中東停火邊緣</span> — 美伊停火默契維持，下週范斯預計赴巴基斯坦再談；核心癥結為核濃縮限制 vs 能源控制權。Polymarket 機率升至 38%。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">美中太空博弈</span> — 金融時報指伊朗取得中國 T101B 偵察衛星，用於監控美軍基地；衝突從飛彈戰升級至太空情報整合。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">全球陣營重組</span> — 中印解凍、中歐汽車互開市場、中俄能源深化；美國外交孤立加劇，盟友各走各的路。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">台股新常態</span> — Q1 累計證交稅 1,237 億，創 20 年最快增速；兆元日均成交量正在成為新常態。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">ASML 上調財測</span> — 全年目標 3,600–4,000 億歐元，韓國（三星／SK 海力士）設備採購佔比從 22% 跳至 45%，2026 年產能已滿。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">AI 法律戰開打</span> — 紐時 vs OpenAI、馬斯克告科羅拉多州、AI 音樂授權談判破裂；監管能否跟上是本輪 AI 行情最大變數。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">中東停火邊緣</span> — 美伊停火默契維持，下週范斯預計赴巴基斯坦再談；核心癥結為核濃縮限制 vs 能源控制權。Polymarket 機率升至 38%。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">美中太空博弈</span> — 金融時報指伊朗取得中國 T101B 偵察衛星，用於監控美軍基地；衝突從飛彈戰升級至太空情報整合。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">全球陣營重組</span> — 中印解凍、中歐汽車互開市場、中俄能源深化；美國外交孤立加劇，盟友各走各的路。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">台股新常態</span> — Q1 累計證交稅 1,237 億，創 20 年最快增速；兆元日均成交量正在成為新常態。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">ASML 上調財測</span> — 全年目標 3,600–4,000 億歐元，韓國（三星／SK 海力士）設備採購佔比從 22% 跳至 45%，2026 年產能已滿。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">AI 法律戰開打</span> — 紐時 vs OpenAI、馬斯克告科羅拉多州、AI 音樂授權談判破裂；監管能否跟上是本輪 AI 行情最大變數。</span></li>
       </ul>
     </div>
 
-    <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
-  </div>
-  <!-- ／Episode: 2026-04-16 -->
+    <!-- ── 04/15 ── -->
+    <div class="day-divider"><span class="day-label">04/15 （三）</span></div>
 
-  <!-- ══════════════════════════════════════════
-       Episode: 2026-04-15
-  ══════════════════════════════════════════ -->
-  <div class="episode" id="ep20260415">
-
-    <div class="ep-meta">
-      <span class="podcast-name">早晨財經速解讀</span>
-      <span class="ep-date">· 2026-04-15（三）</span>
-    </div>
     <h2 class="ep-title">標普距歷史新高僅剩 12 點<br>——PPI 低於預期，市場提前交易和平</h2>
     <div class="ep-host">主持人：游庭皓</div>
 
-    <!-- 本集導讀 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>本集導讀</div>
       <p>
         本集游庭皓聚焦美伊談判希望與 PPI 數據雙重催化下，美股四大指數同步走高。標普距歷史新高僅剩 12 點，那斯達克連續第十個交易日收紅，創 2021 年來最長連漲紀錄。台股同步創下六項歷史新高，包括加權指數、台積電股價（2,055 元）、台指期盤中點位（36,430）等。3 月 PPI 月增僅 0.5%（遠低於預期 1.1%），年增 4%（預期 4.6%），低於預期帶動股市大漲，但「低於預期的通膨」並不等於「沒有通膨」。資金結構面，一季度 5 億以上大戶人數年增 33%，金管會宣布將外國直債納入擔保品，預估釋放 3,000 億元活水。能源供應鏈方面，台灣氦氣從卡達轉向美國，美國石油出口創歷史新高（520 萬桶/天），亞洲需求暴增 82%；台化、台塑因中東供應受阻面臨缺料，石化產能剩三成。宏觀結構上，美國個人所得 MOM 轉負（-0.1%）但 PCE 消費仍增（+0.5%），實質薪資重度衰退；台灣則維持高成長（GDP 7-8%）低通膨（1.2%）格局，但貧富差距今年超越日韓排全球第 12 名。估值方面，標普資訊科技本益比已回到 2022 年低點，游庭皓認為現在是估值低基期，左側投資者仍可按策略持倉。
       </p>
     </div>
-
-    <!-- 大盤觀點 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>大盤觀點</div>
       <div class="outlook-badge bull">▲ 偏多，高乖離留意節奏</div>
@@ -855,18 +578,10 @@
         標普本益比回到 2022 年低點，基期、估值、情緒指標 3 月已一次性到位，支撐多頭中長期邏輯。短期股價乖離率快速拉高，不建議追高加碼，有倉位者讓獲利奔跑；左側投資者靜待下一輪回測機會。市場交易的是「川普有壓力、有誘因促成停火」的預期，而非真實風險已消。
       </p>
     </div>
-
-    <!-- 重點速覽 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>重點速覽</div>
       <table>
-        <thead>
-          <tr>
-            <th>指數／資產</th>
-            <th>漲跌幅</th>
-            <th>收盤</th>
-          </tr>
-        </thead>
+        <thead><tr><th>指數／資產</th><th>漲跌幅</th><th>收盤</th></tr></thead>
         <tbody>
           <tr><td>道瓊</td><td class="up">+317 點 / +0.66%</td><td>48,535</td></tr>
           <tr><td>標普 500</td><td class="up">+1.18%（距新高 12 點）</td><td>6,967</td></tr>
@@ -877,53 +592,32 @@
         </tbody>
       </table>
     </div>
-
-    <!-- 關鍵觀察 -->
     <div class="card">
       <div class="card-label"><span class="dot"></span>關鍵觀察</div>
       <ul class="obs-list">
-        <li>
-          <span class="obs-num">1</span>
-          <span><span class="obs-topic">PPI 低於預期，市場提前慶祝</span> — 月增 0.5%（預期 1.1%），年增 4%（預期 4.6%）。通膨仍在擴散，但「沒有想像中嚴重」已足以帶動股市大漲。</span>
-        </li>
-        <li>
-          <span class="obs-num">2</span>
-          <span><span class="obs-topic">台股六項歷史新高</span> — 加權指數、貴買指數、上市市值（118 兆）、上市櫃市值（128 兆）、台積電股價（2,055）、台指期（36,430）同步刷新。</span>
-        </li>
-        <li>
-          <span class="obs-num">3</span>
-          <span><span class="obs-topic">大戶回流＋金管會鬆綁</span> — Q1 五億以上大戶人數年增 33%，中實戶增 40%；外國直債納入擔保品，預估釋放 3,000 億活水。</span>
-        </li>
-        <li>
-          <span class="obs-num">4</span>
-          <span><span class="obs-topic">能源供應鏈轉向美國</span> — 台灣氦氣從卡達轉美；美油出口 4 月達 520 萬桶/天，月增近三成，亞洲需求暴增 82%。台化、台塑石化產能剩三成，五六月採購能見度不明。</span>
-        </li>
-        <li>
-          <span class="obs-num">5</span>
-          <span><span class="obs-topic">美國消費正在透支</span> — 個人所得 MOM -0.1%，PCE 仍 +0.5%；民眾靠積蓄、信用卡、資產效果撐支出，實質薪資已重度衰退，聯準會幾乎無緊縮空間。</span>
-        </li>
-        <li>
-          <span class="obs-num">6</span>
-          <span><span class="obs-topic">台灣貧富差距超越日韓</span> — 高成長低通膨背後是政府補貼效果；半導體薪資飛漲，餐飲業年薪僅 30 萬，貧富差距今年排全球第 12，首次超越日本與韓國。</span>
-        </li>
+        <li><span class="obs-num">1</span><span><span class="obs-topic">PPI 低於預期，市場提前慶祝</span> — 月增 0.5%（預期 1.1%），年增 4%（預期 4.6%）。通膨仍在擴散，但「沒有想像中嚴重」已足以帶動股市大漲。</span></li>
+        <li><span class="obs-num">2</span><span><span class="obs-topic">台股六項歷史新高</span> — 加權指數、貴買指數、上市市值（118 兆）、上市櫃市值（128 兆）、台積電股價（2,055）、台指期（36,430）同步刷新。</span></li>
+        <li><span class="obs-num">3</span><span><span class="obs-topic">大戶回流＋金管會鬆綁</span> — Q1 五億以上大戶人數年增 33%，中實戶增 40%；外國直債納入擔保品，預估釋放 3,000 億活水。</span></li>
+        <li><span class="obs-num">4</span><span><span class="obs-topic">能源供應鏈轉向美國</span> — 台灣氦氣從卡達轉美；美油出口 4 月達 520 萬桶/天，月增近三成，亞洲需求暴增 82%。台化、台塑石化產能剩三成，五六月採購能見度不明。</span></li>
+        <li><span class="obs-num">5</span><span><span class="obs-topic">美國消費正在透支</span> — 個人所得 MOM -0.1%，PCE 仍 +0.5%；民眾靠積蓄、信用卡、資產效果撐支出，實質薪資已重度衰退，聯準會幾乎無緊縮空間。</span></li>
+        <li><span class="obs-num">6</span><span><span class="obs-topic">台灣貧富差距超越日韓</span> — 高成長低通膨背後是政府補貼效果；半導體薪資飛漲，餐飲業年薪僅 30 萬，貧富差距今年排全球第 12，首次超越日本與韓國。</span></li>
       </ul>
     </div>
 
     <div class="disclaimer">投資組合終端 · 僅供參考，不構成投資建議</div>
   </div>
-  <!-- ／Episode: 2026-04-15 -->
+  <!-- ／Week: 2026-04-14 ~ 2026-04-18 -->
 
 </div>
 
 <script>
-  // Tab switching
   const tabs = document.querySelectorAll('.ep-tab');
-  const episodes = document.querySelectorAll('.episode');
+  const weeks = document.querySelectorAll('.week');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
-      episodes.forEach(e => e.classList.remove('active'));
+      weeks.forEach(w => w.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById(tab.dataset.ep).classList.add('active');
     });
